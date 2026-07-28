@@ -29,7 +29,17 @@
    cp .env.example .env
    ```
 
-4. (Opcional) Levantar Supabase en local con Docker:
+4. Generar el codigo de la base de datos local (Drift lee las tablas en
+   `lib/core/database/tables/` y genera `app_database.g.dart`):
+
+   ```bash
+   dart run build_runner build --delete-conflicting-outputs
+   ```
+
+   Repetir este paso cada vez que se agregue o modifique una tabla en
+   `lib/core/database/tables/`.
+
+5. (Opcional) Levantar Supabase en local con Docker:
 
    ```bash
    supabase login
@@ -38,7 +48,7 @@
    supabase db reset
    ```
 
-5. Correr la app:
+6. Correr la app:
 
    ```bash
    flutter run

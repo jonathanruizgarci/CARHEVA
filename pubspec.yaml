@@ -11,8 +11,17 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
 
-  # Backend / datos
+  # Backend / datos remotos
   supabase_flutter: ^2.6.0
+
+  # Base de datos local (offline-first)
+  drift: ^2.20.2
+  sqlite3_flutter_libs: ^0.5.24
+  path_provider: ^2.1.4
+  path: ^1.9.0
+
+  # Deteccion de conectividad (para la sincronizacion)
+  connectivity_plus: ^6.0.5
 
   # Manejo de estado
   flutter_riverpod: ^2.5.1
@@ -23,10 +32,15 @@ dependencies:
   # Variables de entorno
   flutter_dotenv: ^5.1.0
 
+  # Identificadores locales (ventas/registros creados offline)
+  uuid: ^4.5.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  build_runner: ^2.4.13
+  drift_dev: ^2.20.3
 
 flutter:
   uses-material-design: true
