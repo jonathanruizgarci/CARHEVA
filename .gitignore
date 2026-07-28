@@ -1,0 +1,39 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+*.g.dart
+*.freezed.dart
+*.iml
+.idea/
+*.lock
+
+# Platform build outputs
+android/.gradle/
+android/local.properties
+android/**/gradle-wrapper.jar
+android/key.properties
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/flutter_export_environment.sh
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Supabase local dev
+supabase/.branches
+supabase/.temp
+supabase/.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+!.vscode/extensions.json

@@ -1,0 +1,2 @@
+-- Datos de ejemplo para desarrollo local (supabase db reset).
+-- Se completara con datos reales una vez definido el modelo de negocio.

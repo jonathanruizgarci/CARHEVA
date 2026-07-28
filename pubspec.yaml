@@ -1,0 +1,34 @@
+name: carheva
+description: "Aplicacion de ventas para el sector medico-farmaceutico - CARHEVA."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # Backend / datos
+  supabase_flutter: ^2.6.0
+
+  # Manejo de estado
+  flutter_riverpod: ^2.5.1
+
+  # Navegacion
+  go_router: ^14.2.0
+
+  # Variables de entorno
+  flutter_dotenv: ^5.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
