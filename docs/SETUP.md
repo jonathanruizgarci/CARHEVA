@@ -2,16 +2,67 @@
 
 ## Requisitos
 
-- [Flutter SDK](https://docs.flutter.dev/get-started/install) (canal stable)
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (canal stable) — ver instalacion en Windows abajo
+- [Android Studio](https://developer.android.com/studio) (SDK de Android + emulador)
 - [Supabase CLI](https://supabase.com/docs/guides/cli/getting-started)
-- Docker Desktop (necesario para `supabase start` en local)
-- Cuenta y proyecto en [Supabase](https://supabase.com)
+- Docker Desktop (necesario solo si vas a correr Supabase en local, es opcional)
+- Git
+- Acceso al repo de GitHub y al `.env` del equipo (pedirlo por un canal privado, nunca va en el repo)
+
+## Instalar Flutter en Windows
+
+**`winget install flutter` no existe** — Flutter no publica un paquete
+oficial en winget (solo hay apps de terceros hechas *con* Flutter, y un
+gestor de versiones comunitario llamado Puro que no es de Google). El
+metodo oficial es bajar el zip del SDK e instalarlo a mano:
+
+1. Descargar el SDK estable (evita `Invoke-WebRequest` sin mas: con la
+   barra de progreso activada en PowerShell 5.1 la descarga va muchisimo
+   mas lenta; desactivala con `$ProgressPreference`):
+
+   ```powershell
+   $ProgressPreference = 'SilentlyContinue'
+   $manifest = Invoke-RestMethod -Uri "https://storage.googleapis.com/flutter_infra_release/releases/releases_windows.json"
+   $release = $manifest.releases | Where-Object { $_.hash -eq $manifest.current_release.stable } | Select-Object -First 1
+   Invoke-WebRequest -Uri "$($manifest.base_url)/$($release.archive)" -OutFile "$env:USERPROFILE\Downloads\flutter_windows-stable.zip"
+   ```
+
+2. Extraer a `C:\src\flutter` (evita `Program Files`: Flutter necesita
+   escribir ahi y las rutas con espacios/permisos de admin dan problemas):
+
+   ```powershell
+   Expand-Archive -Path "$env:USERPROFILE\Downloads\flutter_windows-stable.zip" -DestinationPath "C:\src" -Force
+   ```
+
+3. Agregar `C:\src\flutter\bin` al PATH del usuario y abrir una terminal
+   nueva:
+
+   ```powershell
+   [Environment]::SetEnvironmentVariable('Path', $env:Path + ";C:\src\flutter\bin", 'User')
+   ```
+
+4. Verificar la instalacion:
+
+   ```powershell
+   flutter --version
+   flutter doctor
+   ```
+
+   `flutter doctor` va a marcar en rojo/amarillo lo que falte (toolchain de
+   Android, licencias, etc.) — se resuelve instalando Android Studio y
+   corriendo:
+
+   ```powershell
+   flutter doctor --android-licenses
+   ```
 
 ## Primeros pasos
 
 1. Clonar el repo e instalar dependencias de Flutter:
 
    ```bash
+   git clone https://github.com/jonathanruizgarci/CARHEVA.git
+   cd CARHEVA
    flutter pub get
    ```
 
