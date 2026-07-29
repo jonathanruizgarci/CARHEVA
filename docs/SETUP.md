@@ -29,6 +29,10 @@
    cp .env.example .env
    ```
 
+   El proyecto de Supabase ya existe (ref `lmvkezxtahkizurhizbk`); pide el
+   `.env` con la anon key al resto del equipo por un canal privado (Slack,
+   1Password, etc.) — nunca se versiona en el repo.
+
 4. Generar el codigo de la base de datos local (Drift lee las tablas en
    `lib/core/database/tables/` y genera `app_database.g.dart`):
 
@@ -57,5 +61,29 @@
 ## Migraciones de base de datos
 
 - Crear una migracion nueva: `supabase migration new <nombre>`
-- Aplicar migraciones al proyecto remoto: `supabase db push`
+- Aplicar migraciones al proyecto remoto manualmente: `supabase db push`
 - Traer el esquema remoto como migracion: `supabase db pull`
+
+### Despliegue automatico de migraciones (CI)
+
+El workflow [`.github/workflows/supabase-migrations.yml`](../.github/workflows/supabase-migrations.yml)
+se encarga de:
+
+- **En cada Pull Request** contra `main` que toque `supabase/migrations/**`:
+  corre `supabase db push --dry-run` para validar que las migraciones nuevas
+  aplican limpio contra el proyecto real, sin modificar nada.
+- **Al hacer merge/push a `main`**: aplica esas migraciones de verdad con
+  `supabase db push`.
+
+Para que el workflow funcione, hay que configurar estos secretos en
+**GitHub → Settings → Secrets and variables → Actions** del repo
+(`jonathanruizgarci/CARHEVA`) — la anon key **no sirve para esto**, hacen
+falta credenciales con permisos de administracion:
+
+| Secreto | De donde sale |
+| --- | --- |
+| `SUPABASE_ACCESS_TOKEN` | [supabase.com/dashboard/account/tokens](https://supabase.com/dashboard/account/tokens) → "Generate new token" |
+| `SUPABASE_DB_PASSWORD` | La contraseña de la base de datos del proyecto (se define al crear el proyecto; si no la tienes, se puede resetear en Project Settings → Database → Reset database password) |
+
+El `project-ref` (`lmvkezxtahkizurhizbk`) ya esta en el workflow, no hace
+falta agregarlo como secreto.
