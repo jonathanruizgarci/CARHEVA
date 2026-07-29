@@ -9,6 +9,7 @@ on:
     branches: [main]
     paths:
       - "supabase/migrations/**"
+  workflow_dispatch: {}
 
 env:
   SUPABASE_PROJECT_REF: lmvkezxtahkizurhizbk
@@ -35,9 +36,10 @@ jobs:
         env:
           SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
 
-  # Al hacer merge/push a main: aplica las migraciones nuevas al proyecto real.
+  # Al hacer merge/push a main (o al disparar manualmente desde la pestaña
+  # Actions): aplica las migraciones nuevas al proyecto real.
   deploy:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
