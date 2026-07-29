@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 
 import 'clients_table.dart';
 
+@DataClassName('SaleRow')
 class Sales extends Table {
   /// UUID generado en el dispositivo (uuid v4) para poder crear ventas
   /// offline y subirlas despues sin colision de ids con el servidor.

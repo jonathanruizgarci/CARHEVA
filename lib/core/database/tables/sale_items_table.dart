@@ -3,6 +3,7 @@ import 'package:drift/drift.dart';
 import 'products_table.dart';
 import 'sales_table.dart';
 
+@DataClassName('SaleItemRow')
 class SaleItems extends Table {
   TextColumn get id => text()();
   TextColumn get saleId => text().references(Sales, #id)();

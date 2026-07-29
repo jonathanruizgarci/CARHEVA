@@ -3,6 +3,7 @@ import 'package:drift/drift.dart';
 import 'categories_table.dart';
 
 /// tipo: 'generico' | 'formula'. estado: 'activo' | 'descontinuado'.
+@DataClassName('ProductRow')
 class Products extends Table {
   TextColumn get id => text()();
   TextColumn get name => text()();

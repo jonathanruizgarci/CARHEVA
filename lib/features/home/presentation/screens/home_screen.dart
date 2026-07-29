@@ -22,7 +22,13 @@ class HomeScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: const Center(child: Text('Bienvenido a CARHEVA')),
+      body: Center(
+        child: FilledButton.icon(
+          onPressed: () => context.push('/catalog'),
+          icon: const Icon(Icons.medication_outlined),
+          label: const Text('Ver catalogo'),
+        ),
+      ),
     );
   }
 }
